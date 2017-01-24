@@ -20,6 +20,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
         titleLabel.text = "Home"
         titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.systemFont(ofSize: 20)
         //titleLabel.backgroundColor = UIColor.blue
         navigationItem.titleView = titleLabel
         
@@ -35,7 +36,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        //cell.backgroundColor = UIColor.red
         return cell
     }
     
