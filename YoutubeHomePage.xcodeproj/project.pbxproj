@@ -12,6 +12,8 @@
 		B00912151E36AB2000678E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B00912131E36AB2000678E9B /* Main.storyboard */; };
 		B00912171E36AB2000678E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B00912161E36AB2000678E9B /* Assets.xcassets */; };
 		B009121A1E36AB2000678E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B00912181E36AB2000678E9B /* LaunchScreen.storyboard */; };
+		B00912221E36B3BD00678E9B /* videoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00912211E36B3BC00678E9B /* videoCell.swift */; };
+		B00912241E37D39E00678E9B /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00912231E37D39E00678E9B /* ColorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		B00912161E36AB2000678E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B00912191E36AB2000678E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B009121B1E36AB2000678E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B00912211E36B3BC00678E9B /* videoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = videoCell.swift; sourceTree = "<group>"; };
+		B00912231E37D39E00678E9B /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				B00912161E36AB2000678E9B /* Assets.xcassets */,
 				B00912181E36AB2000678E9B /* LaunchScreen.storyboard */,
 				B009121B1E36AB2000678E9B /* Info.plist */,
+				B00912211E36B3BC00678E9B /* videoCell.swift */,
+				B00912231E37D39E00678E9B /* ColorManager.swift */,
 			);
 			path = YoutubeHomePage;
 			sourceTree = "<group>";
@@ -138,6 +144,8 @@
 			files = (
 				B00912121E36AB2000678E9B /* HomeController.swift in Sources */,
 				B00912101E36AB2000678E9B /* AppDelegate.swift in Sources */,
+				B00912221E36B3BD00678E9B /* videoCell.swift in Sources */,
+				B00912241E37D39E00678E9B /* ColorManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
