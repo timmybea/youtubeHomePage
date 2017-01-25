@@ -12,6 +12,8 @@ class Video: NSObject {
 
     var thumbnailImageName: String?
     var title: String?
+    var createdDate: String?
+    var numberOfViews: NSNumber?
     
     var channel: Channel?
 }

@@ -14,9 +14,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         var dontLetMeDownVideo = Video()
         dontLetMeDownVideo.title = "The Beatles - Don't Let Me Down"
         dontLetMeDownVideo.thumbnailImageName = "dontLetMeDown"
+        dontLetMeDownVideo.numberOfViews = 47464731
+        dontLetMeDownVideo.createdDate = "2 years ago"
         
         let beatlesChannel = Channel()
-        beatlesChannel.name = "The Fab Four"
+        beatlesChannel.name = "TheBeatlesVEVO"
         beatlesChannel.profileImageName = "profile"
         
         dontLetMeDownVideo.channel = beatlesChannel
