@@ -10,10 +10,14 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
         
         
@@ -21,13 +25,35 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         titleLabel.text = "Home"
         titleLabel.textColor = UIColor.white
         titleLabel.font = UIFont.systemFont(ofSize: 20)
-        //titleLabel.backgroundColor = UIColor.blue
         navigationItem.titleView = titleLabel
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(videoCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        //make collectionview begin beneath the menu bar
+        collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        
+        setupMenuBar()
+        setupNavBarButtons()
     
     }
+
+    
+    private func setupNavBarButtons() {
+        
+        
+        
+    }
+    
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+    
+    
+    }
+    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5

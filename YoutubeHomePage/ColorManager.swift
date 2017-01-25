@@ -21,4 +21,8 @@ class ColorManager: NSObject {
     class func customGray() -> UIColor {
         return UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
     }
+    
+    class func customIconRed() -> UIColor {
+        return UIColor(red: 91/255, green: 14/255, blue: 13/255, alpha: 1)
+    }
 }
