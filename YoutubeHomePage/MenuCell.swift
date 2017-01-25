@@ -33,8 +33,8 @@ class MenuCell: UICollectionViewCell {
         addSubview(imageView)
         addSubview(highlightBar)
         
-        addConstraintsWithFormat(format: "H:[v0(26)]", views: imageView)
-        addConstraintsWithFormat(format: "V:[v0(26)]", views: imageView)
+        addConstraintsWithFormat(format: "H:[v0(20)]", views: imageView)
+        addConstraintsWithFormat(format: "V:[v0(20)]", views: imageView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: highlightBar)
         addConstraintsWithFormat(format: "V:[v0(5)]|", views: highlightBar)
         

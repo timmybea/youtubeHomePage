@@ -1,5 +1,5 @@
 //
-//  videoCell.swift
+//  VideoCell.swift
 //  YoutubeHomePage
 //
 //  Created by Tim Beals on 2017-01-23.
@@ -9,7 +9,19 @@
 import UIKit
 
 
-class videoCell: UICollectionViewCell {
+class VideoCell: UICollectionViewCell {
+    
+    var video: Video? {
+        didSet {
+            if let thumbnailName = video?.thumbnailImageName {
+                thumbnailImageView.image = UIImage(named: thumbnailName)
+            }
+            if let profileImageName = video?.channel?.profileImageName {
+                userProfileImageView.image = UIImage(named: profileImageName)
+            }
+            titleLabel.text = video?.title
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,10 +57,9 @@ class videoCell: UICollectionViewCell {
 
     }
     
-    
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "dontLetMeDown")
+        //imageView.image = UIImage(named: "dontLetMeDown")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -56,7 +67,7 @@ class videoCell: UICollectionViewCell {
     
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile")
+        //imageView.image = UIImage(named: "profile")
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
         return imageView
@@ -64,7 +75,7 @@ class videoCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "The Beatles - Don't Let Me Down"
+        //label.text = "The Beatles - Don't Let Me Down"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
