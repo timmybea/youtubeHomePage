@@ -16,19 +16,18 @@ class VideoCell: UICollectionViewCell {
     //create cell when the video property is set
     var video: Video? {
         didSet {
-            if let thumbnailName = video?.thumbnailImageName {
-                thumbnailImageView.image = UIImage(named: thumbnailName)
-            }
-            if let profileImageName = video?.channel?.profileImageName {
-                userProfileImageView.image = UIImage(named: profileImageName)
-            }
+            
+            //ImageView extension methods
+            thumbnailImageView.loadImageUsingURL(URLstring: (video?.thumbnailImageName)!)
+            userProfileImageView.loadImageUsingURL(URLstring: (video?.channel?.profileImageName)!)
+
             titleLabel.text = video?.title
             
-            if let channelName = video?.channel?.name, let views = video?.numberOfViews,  let dateCreated = video?.createdDate {
+            if let channelName = video?.channel?.name, let views = video?.numberOfViews /*let dateCreated = video?.createdDate*/ {
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 if let viewString = numberFormatter.string(from: views) {
-                    subtitleTextView.text = "\(channelName)  •  \(viewString) views • \(dateCreated)"
+                    subtitleTextView.text = "\(channelName)  •  \(viewString) views " /*• \(dateCreated)*/
                 }
             }
             //get estimated size of video title to determine if single or double line
@@ -64,7 +63,7 @@ class VideoCell: UICollectionViewCell {
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
         
         //MARK: Vertical constraints
-        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
         
         //MARK: titleLabel constraints
         
@@ -85,17 +84,16 @@ class VideoCell: UICollectionViewCell {
 
     }
     
-    let thumbnailImageView: UIImageView = {
-        let imageView = UIImageView()
-        //imageView.image = UIImage(named: "dontLetMeDown")
+    let thumbnailImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
     
-    let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        //imageView.image = UIImage(named: "profile")
+    let userProfileImageView: CustomImageView = {
+        let imageView = CustomImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
         return imageView
@@ -103,7 +101,6 @@ class VideoCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        //label.text = "The Beatles - Don't Let Me Down"
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightMedium)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +109,6 @@ class VideoCell: UICollectionViewCell {
     
     let subtitleTextView: UITextView = {
         let textView = UITextView()
-        //textView.text = "TheBeatlesVEVO • 47,464,731 views • 1 year ago"
         textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
         textView.textColor = UIColor.lightGray
         textView.translatesAutoresizingMaskIntoConstraints = false
