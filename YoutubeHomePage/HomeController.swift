@@ -105,7 +105,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let searchImage = UIImage(named: "search")?.withRenderingMode(.alwaysTemplate)
         let moreImage = UIImage(named: "more")?.withRenderingMode(.alwaysTemplate)
         
-        let moreBarButtonItem = UIBarButtonItem(image: moreImage, style: .plain, target: self, action: #selector(moreAction))
+        let moreBarButtonItem = UIBarButtonItem(image: moreImage, style: .plain, target: self, action: #selector(handleMore))
         let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
         
         moreBarButtonItem.tintColor = UIColor.white
@@ -117,10 +117,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         print(123)
     }
     
-    func moreAction() {
-        
-    }
+    let settingsLauncher = SettingsLauncher()
     
+    func handleMore() {
+        //show menu with options
+        settingsLauncher.launchSettings()
+    }
     
     private func setupMenuBar() {
         view.addSubview(menuBar)

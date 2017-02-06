@@ -18,6 +18,7 @@
 		B009122E1E37F3CD00678E9B /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B009122D1E37F3CD00678E9B /* MenuCell.swift */; };
 		B00912301E391F0E00678E9B /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B009122F1E391F0E00678E9B /* Video.swift */; };
 		B00912321E39269A00678E9B /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00912311E39269A00678E9B /* Channel.swift */; };
+		B07584FE1E48DDE700FDC14B /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		B009122D1E37F3CD00678E9B /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		B009122F1E391F0E00678E9B /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		B00912311E39269A00678E9B /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				B00912111E36AB2000678E9B /* HomeController.swift */,
+				B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				B009122C1E37E70500678E9B /* MenuBar.swift in Sources */,
 				B00912101E36AB2000678E9B /* AppDelegate.swift in Sources */,
 				B00912301E391F0E00678E9B /* Video.swift in Sources */,
+				B07584FE1E48DDE700FDC14B /* SettingsLauncher.swift in Sources */,
 				B00912221E36B3BD00678E9B /* VideoCell.swift in Sources */,
 				B00912321E39269A00678E9B /* Channel.swift in Sources */,
 				B00912241E37D39E00678E9B /* ColorManager.swift in Sources */,
@@ -347,6 +351,7 @@
 				B00912201E36AB2000678E9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
