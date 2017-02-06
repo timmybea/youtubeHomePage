@@ -18,10 +18,10 @@ class MenuCell: UICollectionViewCell {
         return iv
     }()
     
-    let highlightBar: UIView = {
-        let view = UIView()
-        return view
-    }()
+//    let highlightBar: UIView = {
+//        let view = UIView()
+//        return view
+//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,12 +31,12 @@ class MenuCell: UICollectionViewCell {
     func setupCell() {
         //self.backgroundColor = UIColor.yellow
         addSubview(imageView)
-        addSubview(highlightBar)
+        //addSubview(highlightBar)
         
         addConstraintsWithFormat(format: "H:[v0(20)]", views: imageView)
         addConstraintsWithFormat(format: "V:[v0(20)]", views: imageView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: highlightBar)
-        addConstraintsWithFormat(format: "V:[v0(5)]|", views: highlightBar)
+//        addConstraintsWithFormat(format: "H:|[v0]|", views: highlightBar)
+//        addConstraintsWithFormat(format: "V:[v0(5)]|", views: highlightBar)
         
         
         addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
@@ -46,14 +46,15 @@ class MenuCell: UICollectionViewCell {
     override var isHighlighted: Bool {
         didSet {
             imageView.tintColor = isHighlighted ? UIColor.white : ColorManager.customIconRed()
-            highlightBar.backgroundColor = isHighlighted ? UIColor.white : ColorManager.customRed()
+            //highlightBar.backgroundColor = isHighlighted ? UIColor.white : ColorManager.customRed()
         }
     }
 
     override var isSelected: Bool {
         didSet {
             imageView.tintColor = isSelected ? UIColor.white : ColorManager.customIconRed()
-            highlightBar.backgroundColor = isSelected ? UIColor.white : ColorManager.customRed()        }
+            //highlightBar.backgroundColor = isSelected ? UIColor.white : ColorManager.customRed()        
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

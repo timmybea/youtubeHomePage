@@ -15,7 +15,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        var dontLetMeDownVideo = Video()
 //        dontLetMeDownVideo.title = "The Beatles - Don't Let Me Down"
 //        dontLetMeDownVideo.thumbnailImageName = "dontLetMeDown"
-//        dontLetMeDownVideo.numberOfViews = 47464731
+//        dontLetMeDownVvaro.numberOfViews = 47464731
 //        dontLetMeDownVideo.createdDate = "2 years ago"
 //        
 //        let beatlesChannel = Channel()
@@ -117,17 +117,44 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         print(123)
     }
     
-    let settingsLauncher = SettingsLauncher()
+    
+    //LAZY VARS ARE COOL! this proprety only gets initialized once when it is needed. This is not initialized when the Home Controller is initialized which means that we have access to the 'self' property. It also doesn't make sense to repeatedly set the launcher homeController property to self, so this allows us to do it only the once. This means that our Settings launcher can call the HomeController function to push a new view controller in it's completion block when a settings item is selected.
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
     
     func handleMore() {
         //show menu with options
         settingsLauncher.launchSettings()
     }
     
+    func pushToSettingsController(setting: Setting) {
+            let settingViewController = UIViewController()
+            settingViewController.navigationItem.title = setting.name.rawValue
+            settingViewController.view.backgroundColor = UIColor.white
+            
+            navigationController?.navigationBar.tintColor = UIColor.white
+            navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+            navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
     private func setupMenuBar() {
+        let redView = UIView()
+        redView.backgroundColor = ColorManager.customRed()
+        view.addSubview(redView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)
+        
         view.addSubview(menuBar)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+        
+        //Create disappearing nav bar effect with scrolling
+        navigationController?.hidesBarsOnSwipe = true
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        
     }
     
     

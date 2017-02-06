@@ -19,6 +19,7 @@
 		B00912301E391F0E00678E9B /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = B009122F1E391F0E00678E9B /* Video.swift */; };
 		B00912321E39269A00678E9B /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00912311E39269A00678E9B /* Channel.swift */; };
 		B07584FE1E48DDE700FDC14B /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */; };
+		B07585001E48ED6B00FDC14B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07584FF1E48ED6B00FDC14B /* SettingsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		B009122F1E391F0E00678E9B /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		B00912311E39269A00678E9B /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		B07584FF1E48ED6B00FDC14B /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				B00912211E36B3BC00678E9B /* VideoCell.swift */,
 				B009122B1E37E70500678E9B /* MenuBar.swift */,
 				B009122D1E37F3CD00678E9B /* MenuCell.swift */,
+				B07584FF1E48ED6B00FDC14B /* SettingsCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				B00912221E36B3BD00678E9B /* VideoCell.swift in Sources */,
 				B00912321E39269A00678E9B /* Channel.swift in Sources */,
 				B00912241E37D39E00678E9B /* ColorManager.swift in Sources */,
+				B07585001E48ED6B00FDC14B /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
