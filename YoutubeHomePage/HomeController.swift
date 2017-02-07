@@ -136,6 +136,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     
+    //MARK: Use scrollview method to highlight the apporopriate button in the menubar
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        let item: Int = Int(targetContentOffset.pointee.x / view.frame.width)
+        let indexPath: IndexPath = IndexPath(item: item, section: 0)
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        
+    }
     
 //    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return videos?.count ?? 0

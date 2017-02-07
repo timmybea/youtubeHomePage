@@ -76,13 +76,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     //MARK: animate the sliding horizontal view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print(indexPath.item)
-        let x = CGFloat(indexPath.item) * frame.width / 4
-        self.horizontalViewLeftAnchor?.constant = x
-        
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
         
         //change the collectionview cell in Home Controller with the menubar buttons
         homeController?.scrollToItemAt(index: indexPath.item)
@@ -96,7 +89,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
 
     
     
