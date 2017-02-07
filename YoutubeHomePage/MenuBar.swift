@@ -12,6 +12,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     let iconNames = ["Home", "Trending", "Subscriptions", "Account"]
     
+    var homeController: HomeController?
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -81,6 +83,9 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
+        
+        //change the collectionview cell in Home Controller with the menubar buttons
+        homeController?.scrollToItemAt(index: indexPath.item)
     }
     
     //MARK: FlowLayout

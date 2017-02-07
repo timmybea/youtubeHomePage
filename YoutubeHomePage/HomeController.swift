@@ -12,8 +12,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     var videos: [Video]?
     
-    let menuBar: MenuBar = {
+    let cellId = "cellId"
+    
+    lazy var menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.homeController = self
         return mb
     }()
     
@@ -39,18 +42,28 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
         
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        //make collectionview begin beneath the menu bar
-        collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
-        
+        setupCollectionView()
         setupMenuBar()
         setupNavBarButtons()
     
     }
-
+    
+    func setupCollectionView() {
+        
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        
+        collectionView?.isPagingEnabled = true
+        collectionView?.backgroundColor = UIColor.white
+        //collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        //make collectionview begin beneath the menu bar
+        collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+    }
     
     private func setupNavBarButtons() {
         
@@ -103,34 +116,64 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
         
-        //Create disappearing nav bar effect with scrolling
+        //Create disappearing nav bar effect with vertical scrolling
         navigationController?.hidesBarsOnSwipe = true
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         
     }
     
+    func scrollToItemAt(index: Int) {
+        let indexPath: NSIndexPath = NSIndexPath(item: index, section: 0)
+        collectionView?.scrollToItem(at: indexPath as IndexPath, at: [], animated: true)
+    }
     
+    
+    //MARK: use the content offset of the collection view to move the white horizontal view of the menu bar
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //print(scrollView.contentOffset.x)
+        
+        menuBar.horizontalViewLeftAnchor?.constant = scrollView.contentOffset.x / 4
+    }
+    
+    
+    
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return videos?.count ?? 0
+//    }    
+//    
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
+//        cell.video  = videos?[indexPath.item]
+//        return cell
+//    }
+//    
+//    //MARK: Delegate FlowLayout methods
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        
+//        let height = (view.frame.width - 32) * 9 / 16
+//        return CGSize(width: view.frame.width, height: height + 88 + 16)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+    
+    //MARK: Create cells to correspond with each button in the MenuBar
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos?.count ?? 0
-    }    
-    
+        return 4
+    }
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-        cell.video  = videos?[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        let colors: [UIColor] = [UIColor.blue, UIColor.orange, UIColor.yellow, UIColor.green]
+        
+        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
-    
-    //MARK: Delegate FlowLayout methods
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let height = (view.frame.width - 32) * 9 / 16
-        return CGSize(width: view.frame.width, height: height + 88 + 16)
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-
 }
 
