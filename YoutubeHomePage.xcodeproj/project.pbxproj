@@ -20,6 +20,7 @@
 		B00912321E39269A00678E9B /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00912311E39269A00678E9B /* Channel.swift */; };
 		B07584FE1E48DDE700FDC14B /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */; };
 		B07585001E48ED6B00FDC14B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07584FF1E48ED6B00FDC14B /* SettingsCell.swift */; };
+		B07585031E49792000FDC14B /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07585021E49792000FDC14B /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B00912311E39269A00678E9B /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		B07584FD1E48DDE700FDC14B /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		B07584FF1E48ED6B00FDC14B /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		B07585021E49792000FDC14B /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		B009120E1E36AB2000678E9B /* YoutubeHomePage */ = {
 			isa = PBXGroup;
 			children = (
+				B07585011E4978D900FDC14B /* ApiService */,
 				B009122A1E37E3C400678E9B /* Model */,
 				B00912291E37E3BE00678E9B /* Controller */,
 				B00912281E37E3B700678E9B /* View */,
@@ -118,6 +121,14 @@
 				B00912311E39269A00678E9B /* Channel.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		B07585011E4978D900FDC14B /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				B07585021E49792000FDC14B /* ApiService.swift */,
+			);
+			name = ApiService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 			files = (
 				B009122E1E37F3CD00678E9B /* MenuCell.swift in Sources */,
 				B00912271E37E26400678E9B /* Extensions.swift in Sources */,
+				B07585031E49792000FDC14B /* ApiService.swift in Sources */,
 				B00912121E36AB2000678E9B /* HomeController.swift in Sources */,
 				B009122C1E37E70500678E9B /* MenuBar.swift in Sources */,
 				B00912101E36AB2000678E9B /* AppDelegate.swift in Sources */,
