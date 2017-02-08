@@ -9,8 +9,6 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    var videos: [Video]?
     
     let cellId = "cellId"
     
@@ -20,26 +18,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return mb
     }()
     
-    func fetchVideoData() {
-        
-        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
-            self.videos = videos
-            self.collectionView?.reloadData()
-        }
-        
-    }
+    let headings: [String] = ["  Home", "  Trending", "  Subscriptions", "  Account"]
+    var titleLabel: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchVideoData()
-        
         navigationController?.navigationBar.isTranslucent = false
         
-        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        titleLabel.text = "Home"
-        titleLabel.textColor = UIColor.white
-        titleLabel.font = UIFont.systemFont(ofSize: 20)
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
+        titleLabel?.textColor = UIColor.white
+        titleLabel?.text = "  Home"
+        titleLabel?.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
         
         setupCollectionView()
@@ -58,7 +48,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.isPagingEnabled = true
         collectionView?.backgroundColor = UIColor.white
         //collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         
         //make collectionview begin beneath the menu bar
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -131,8 +121,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     //MARK: use the content offset of the collection view to move the white horizontal view of the menu bar
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //print(scrollView.contentOffset.x)
-        
-        menuBar.horizontalViewLeftAnchor?.constant = scrollView.contentOffset.x / 4
+        let index = scrollView.contentOffset.x / 4
+        menuBar.horizontalViewLeftAnchor?.constant = index
     }
     
     
@@ -142,29 +132,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let item: Int = Int(targetContentOffset.pointee.x / view.frame.width)
         let indexPath: IndexPath = IndexPath(item: item, section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-        
+        titleLabel?.text = headings[item]
     }
-    
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return videos?.count ?? 0
-//    }    
-//    
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-//        cell.video  = videos?[indexPath.item]
-//        return cell
-//    }
-//    
-//    //MARK: Delegate FlowLayout methods
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        let height = (view.frame.width - 32) * 9 / 16
-//        return CGSize(width: view.frame.width, height: height + 88 + 16)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
     
     //MARK: Create cells to correspond with each button in the MenuBar
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -174,14 +143,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        let colors: [UIColor] = [UIColor.blue, UIColor.orange, UIColor.yellow, UIColor.green]
-        
-        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - 50)
     }
 }
 

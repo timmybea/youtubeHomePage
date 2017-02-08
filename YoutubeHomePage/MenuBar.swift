@@ -79,6 +79,8 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         
         //change the collectionview cell in Home Controller with the menubar buttons
         homeController?.scrollToItemAt(index: indexPath.item)
+        let index = indexPath.item
+        homeController?.titleLabel?.text = homeController?.headings[index]
     }
     
     //MARK: FlowLayout
@@ -89,9 +91,5 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
-    
-    
-
 
 }
