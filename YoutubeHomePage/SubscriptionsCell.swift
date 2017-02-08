@@ -10,12 +10,11 @@ import UIKit
 
 class SubscriptionsCell: FeedCell {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override func fetchVideoData() {
+        ApiService.sharedInstance.fetchSubscriptions { (videos) in
+            self.videos = videos
+            self.collectionView.reloadData()
+        }
     }
-    */
 
 }

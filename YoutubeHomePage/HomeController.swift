@@ -12,6 +12,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let feedId = "feedId"
     let trendingId = "trendingId"
+    let subscriptionId = "subscriptionId"
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -50,6 +51,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: feedId)
         collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingId)
+        collectionView?.register(SubscriptionsCell.self, forCellWithReuseIdentifier: subscriptionId)
         
         //make collectionview begin beneath the menu bar
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -148,13 +150,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.item == 0 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: feedId, for: indexPath)
-        } else if indexPath.item == 1 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: trendingId, for: indexPath)
+        let identifier: String?
+        if indexPath.item == 1 {
+            identifier = trendingId
+        } else if indexPath.item == 2 {
+            identifier = subscriptionId
+        } else {
+            identifier = feedId
         }
-        return collectionView.dequeueReusableCell(withReuseIdentifier: feedId, for: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: identifier!, for: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

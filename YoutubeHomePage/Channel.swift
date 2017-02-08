@@ -10,7 +10,12 @@ import UIKit
 
 class Channel: NSObject {
 
-    var profileImageName: String?
+    var profile_image_name: String?
     var name: String?
     
+    
+    init(dictionary: [String: AnyObject]) {
+        super.init()
+        self.setValuesForKeys(dictionary)
+    }
 }

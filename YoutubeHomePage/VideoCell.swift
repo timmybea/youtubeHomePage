@@ -18,12 +18,12 @@ class VideoCell: UICollectionViewCell {
         didSet {
             
             //ImageView extension methods
-            thumbnailImageView.loadImageUsingURL(URLstring: (video?.thumbnailImageName)!)
-            userProfileImageView.loadImageUsingURL(URLstring: (video?.channel?.profileImageName)!)
+            thumbnailImageView.loadImageUsingURL(URLstring: (video?.thumbnail_image_name)!)
+            userProfileImageView.loadImageUsingURL(URLstring: (video?.channel?.profile_image_name)!)
 
             titleLabel.text = video?.title
             
-            if let channelName = video?.channel?.name, let views = video?.numberOfViews /*let dateCreated = video?.createdDate*/ {
+            if let channelName = video?.channel?.name, let views = video?.number_of_views /*let dateCreated = video?.createdDate*/ {
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 if let viewString = numberFormatter.string(from: views) {

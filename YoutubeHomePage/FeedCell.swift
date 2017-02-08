@@ -14,11 +14,10 @@ class FeedCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionView
     
     func fetchVideoData() {
         
-        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
+        ApiService.sharedInstance.fetchFeed { (videos: [Video]) in
             self.videos = videos
             self.collectionView.reloadData()
         }
-        
     }
     
     //Use lazy var to access the self
