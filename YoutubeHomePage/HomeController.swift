@@ -10,7 +10,8 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let cellId = "cellId"
+    let feedId = "feedId"
+    let trendingId = "trendingId"
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -47,8 +48,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView?.isPagingEnabled = true
         collectionView?.backgroundColor = UIColor.white
-        //collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: feedId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingId)
         
         //make collectionview begin beneath the menu bar
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -147,9 +148,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        return cell
+        if indexPath.item == 0 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: feedId, for: indexPath)
+        } else if indexPath.item == 1 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: trendingId, for: indexPath)
+        }
+        return collectionView.dequeueReusableCell(withReuseIdentifier: feedId, for: indexPath)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
