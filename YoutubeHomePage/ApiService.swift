@@ -50,16 +50,16 @@ class ApiService: NSObject {
                 
                 do {
                     //Look at bottom of file to see regular way to parse json without setValueForKeys
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                    
-                    var videos = [Video]()
-                    
-                    for dictionary in json as! [[String: AnyObject]] { //an array or dictionaries
-                         //check out setValueForKey in the video object to see the inititalization of the video and channel objects
-                        let newVideo = Video(dictionary: dictionary)
-                        videos.append(newVideo)
-                        DispatchQueue.main.async {
-                            completion(videos)
+                    if let unwrappedData = data, let jsonDictionaries = try JSONSerialization.jsonObject(with: unwrappedData, options: .mutableContainers) as? [[String: AnyObject]] {
+                        var videos = [Video]()
+                        
+                        for dictionary in jsonDictionaries { //an array or dictionaries
+                            //check out setValueForKey in the video object to see the inititalization of the video and channel objects
+                            let newVideo = Video(dictionary: dictionary)
+                            videos.append(newVideo)
+                            DispatchQueue.main.async {
+                                completion(videos)
+                            }
                         }
                     }
                 } catch let jsonError {
@@ -70,6 +70,8 @@ class ApiService: NSObject {
     }
     
 }
+
+//THIS WAS INSIDE THE DO-CATCH
 
 //let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
 //
