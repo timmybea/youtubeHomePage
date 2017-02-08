@@ -50,16 +50,20 @@ class ApiService: NSObject {
                 
                 do {
                     //Look at bottom of file to see regular way to parse json without setValueForKeys
+                    //check out setValueForKey in the video object to see the inititalization of the video and channel objects
                     if let unwrappedData = data, let jsonDictionaries = try JSONSerialization.jsonObject(with: unwrappedData, options: .mutableContainers) as? [[String: AnyObject]] {
-                        var videos = [Video]()
                         
-                        for dictionary in jsonDictionaries { //an array or dictionaries
-                            //check out setValueForKey in the video object to see the inititalization of the video and channel objects
-                            let newVideo = Video(dictionary: dictionary)
-                            videos.append(newVideo)
-                            DispatchQueue.main.async {
-                                completion(videos)
-                            }
+                        let videos = jsonDictionaries.map({ return Video(dictionary: $0)})
+                        
+//                      THIS IS HOW VIDEOS WOULD BE SET UP WITHOUT THE MAP FUNCTION
+//                      let videos = [Video]()
+//                      for dictionary in jsonDictionaries {
+//                            let newVideo = Video(dictionary: dictionary)
+//                            videos.append(newVideo)
+//                      }
+                        
+                        DispatchQueue.main.async {
+                            completion(videos)
                         }
                     }
                 } catch let jsonError {

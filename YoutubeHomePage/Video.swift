@@ -8,7 +8,32 @@
 
 import UIKit
 
-class Video: NSObject {
+class SafeJsonObject: NSObject {
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+        //To prevent a crash if new or extra keys appear in the json, we need to test if the keys are able to be set:
+        let upperFirstChar = String(key.characters.first!).uppercased()
+        let index = key.index(key.startIndex, offsetBy: 1)
+        let removedFirstLetter = key.substring(from: index)
+        let CapitalizedKey = upperFirstChar + removedFirstLetter
+        
+        
+        let selector = NSSelectorFromString("set\(CapitalizedKey):")
+        let response = self.responds(to: selector)
+        
+        
+        if !response {
+            return
+        } else {
+            //NSObject setValue method
+            super.setValue(value, forKey: key)
+        }
+    }
+    
+}
+
+
+class Video: SafeJsonObject {
 
     var thumbnail_image_name: String?
     var title: String?
@@ -26,10 +51,10 @@ class Video: NSObject {
     
     //This function is called iteratively by setValuesForKeys in init method.
     override func setValue(_ value: Any?, forKey key: String) {
+        
         if key == "channel" {
             self.channel = Channel(dictionary: value as! [String : AnyObject])
         } else {
-            //execute the default setValue function (super)
             super.setValue(value, forKey: key)
         }
     }
