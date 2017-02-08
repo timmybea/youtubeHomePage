@@ -79,8 +79,6 @@ class MenuBar: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UIC
         
         //change the collectionview cell in Home Controller with the menubar buttons
         homeController?.scrollToItemAt(index: indexPath.item)
-        let index = indexPath.item
-        homeController?.titleLabel?.text = homeController?.headings[index]
     }
     
     //MARK: FlowLayout

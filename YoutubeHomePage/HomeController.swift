@@ -18,7 +18,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return mb
     }()
     
-    let headings: [String] = ["  Home", "  Trending", "  Subscriptions", "  Account"]
+    let headings: [String] = ["Home", "Trending", "Subscriptions", "Account"]
     var titleLabel: UILabel?
     
     override func viewDidLoad() {
@@ -115,6 +115,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func scrollToItemAt(index: Int) {
         let indexPath: NSIndexPath = NSIndexPath(item: index, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: [], animated: true)
+        setTitleFor(index: index)
     }
     
     
@@ -132,7 +133,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let item: Int = Int(targetContentOffset.pointee.x / view.frame.width)
         let indexPath: IndexPath = IndexPath(item: item, section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-        titleLabel?.text = headings[item]
+        setTitleFor(index: item)
+    }
+    
+    func setTitleFor(index: Int) {
+        let heading = "  \(headings[index])"
+        titleLabel?.text = heading
     }
     
     //MARK: Create cells to correspond with each button in the MenuBar
