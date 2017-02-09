@@ -72,5 +72,9 @@ class FeedCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionView
         return 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        VideoLauncher.launchVideo()
+    }
+    
     
 }
