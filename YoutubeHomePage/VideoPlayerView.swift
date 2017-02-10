@@ -28,15 +28,19 @@ class VideoPlayerView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.white
         button.addTarget(self, action: #selector(handlePausePlayTouch), for: .touchUpInside)
-        
-        
         return button
     }()
     
+    func handleTapGesture() {
+        if isSettingPlay {
+            handlePausePlayTouch()
+        }
+    }
+    
     func handlePausePlayTouch() {
         if isSettingPlay {
-            //print("Pause button pressed")
             player?.pause()
+            pausePlayButton.alpha = 1
             let image = UIImage(named: "Play")
             pausePlayButton.setImage(image, for: .normal)
             isSettingPlay = false
@@ -45,9 +49,18 @@ class VideoPlayerView: UIView {
             let image = UIImage(named: "Pause")
             pausePlayButton.setImage(image, for: .normal)
             isSettingPlay = true
+            fadeButton()
         }
     }
     
+    func fadeButton() {
+        let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            UIView.animate(withDuration: 1, animations: {
+                self.pausePlayButton.alpha = 0
+            })
+        }
+    }
     
     let controlsContainerView: UIView = {
         let view = UIView()
@@ -96,9 +109,6 @@ class VideoPlayerView: UIView {
             player?.seek(to: seekTime, completionHandler: { (completedSeek) in
                 //do something here
             })
-
-
-            
         }
     }
 
@@ -116,6 +126,8 @@ class VideoPlayerView: UIView {
         controlsContainerView.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
         
         controlsContainerView.addSubview(pausePlayButton)
         pausePlayButton.isHidden = true
@@ -162,6 +174,25 @@ class VideoPlayerView: UIView {
         
         //This keyPath is called when the AVPlayer begins rendering frames. In other words, when the video has loaded and starts playing. Notice the observeValue function below...
         player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+        
+        
+        //MARK:track progress of the video
+        let interval = CMTime(value: 1, timescale: 2)
+        player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+            let seconds = CMTimeGetSeconds(progressTime)
+            let secondsString = String(format: "%02d", Int(seconds) % 60)
+            let minutesString = String(format: "%02d", Int(seconds) / 60)
+            self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
+            
+            //slider value should move with current play time. Slider values between 0 - 1
+            if let duration = self.player?.currentItem?.duration {
+                let totalSeconds = CMTimeGetSeconds(duration)
+                
+                self.slider.value = Float(seconds / totalSeconds)
+            }
+        })
+        
+        
     }
     
     
@@ -171,7 +202,8 @@ class VideoPlayerView: UIView {
             activityIndicatorView.stopAnimating()
             controlsContainerView.backgroundColor = UIColor.clear
             pausePlayButton.isHidden = false
-            
+            fadeButton()
+                    
             if let duration = player?.currentItem?.duration {
                 let totalSeconds = CMTimeGetSeconds(duration)
                 let secondsText = String(format: "%02d", Int(totalSeconds) % 60)
