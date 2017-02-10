@@ -66,8 +66,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.collectionView.frame = CGRect(x: 0, y: y, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }, completion: nil)
             
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissNoSetting)))
         }
+    }
+    
+    func dismissNoSetting() {
+        handleDismiss(setting: settingsArray[5])
     }
     
     func handleDismiss(setting: Setting) {

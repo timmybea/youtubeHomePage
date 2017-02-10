@@ -10,11 +10,15 @@ import UIKit
 
 class VideoLauncher: NSObject {
 
+    var view: UIView = {
+        let view = UIView()
+        return view
+    }()
     
-    class func launchVideo() {
+    func launchVideo() {
         //setup background view with animation        
         if let window = UIApplication.shared.keyWindow {
-            let view = UIView(frame: window.frame)
+            view = UIView(frame: window.frame)
             view.backgroundColor = UIColor.white
             
             //Note that this height is for standard 16:9 screen ratio used by youtube
@@ -22,22 +26,31 @@ class VideoLauncher: NSObject {
             let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: height)
             let videoPlayerView = VideoPlayerView(frame: frame)
             
-            view.frame = CGRect(x: window.frame.width - 5, y: window.frame.height - 5, width: 5, height: 5)
-        
+            view.frame = CGRect(x: window.frame.width, y: window.frame.height, width: 0, height: 0)
+            view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
+            
             view.addSubview(videoPlayerView)
             window.addSubview(view)
             
             UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                view.frame = window.frame
+                self.view.frame = window.frame
                 
             }, completion: { (true) in
                 //print("animation complete")
                 UIApplication.shared.setStatusBarHidden(true, with: .slide)
             })
         }
-        
-        
-        
     }
-    
+
+    func handleDismiss() {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
+            if let window = UIApplication.shared.keyWindow {
+                self.view.frame = CGRect(x: window.frame.width, y: window.frame.height, width: 0, height: 0)
+            }
+        }, completion: { (true) in
+            //print("animation complete")
+            UIApplication.shared.setStatusBarHidden(false, with: .slide)
+        })
+    }
 }

@@ -20,6 +20,11 @@ class FeedCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionView
         }
     }
     
+    lazy var videoLauncher: VideoLauncher = {
+        let launcher = VideoLauncher()
+        return launcher
+    }()
+    
     //Use lazy var to access the self
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -73,7 +78,7 @@ class FeedCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        VideoLauncher.launchVideo()
+        videoLauncher.launchVideo()
     }
     
     

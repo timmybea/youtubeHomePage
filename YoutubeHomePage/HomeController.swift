@@ -92,6 +92,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             let settingViewController = UIViewController()
             settingViewController.navigationItem.title = setting.name.rawValue
             settingViewController.view.backgroundColor = UIColor.white
+        
+        
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            settingViewController.view.addSubview(label)
+            label.centerXAnchor.constraint(equalTo: settingViewController.view.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: settingViewController.view.centerYAnchor, constant: -50).isActive = true
+            label.widthAnchor.constraint(equalTo: settingViewController.view.widthAnchor).isActive = true
+            label.heightAnchor.constraint(equalToConstant: 60)
+        
+            label.numberOfLines = 2
+            label.text = "Empty demonstration view controller"
+            label.textColor = ColorManager.customRed()
+            label.font = UIFont.boldSystemFont(ofSize: 22)
+            label.textAlignment = .center
             
             navigationController?.navigationBar.tintColor = UIColor.white
             navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]

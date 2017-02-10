@@ -32,9 +32,7 @@ class VideoPlayerView: UIView {
     }()
     
     func handleTapGesture() {
-        if isSettingPlay {
             handlePausePlayTouch()
-        }
     }
     
     func handlePausePlayTouch() {
@@ -46,6 +44,7 @@ class VideoPlayerView: UIView {
             isSettingPlay = false
         } else {
             player?.play()
+            pausePlayButton.alpha = 1
             let image = UIImage(named: "Pause")
             pausePlayButton.setImage(image, for: .normal)
             isSettingPlay = true
@@ -57,8 +56,10 @@ class VideoPlayerView: UIView {
         let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             UIView.animate(withDuration: 1, animations: {
-                self.pausePlayButton.alpha = 0
-            })
+                if self.isSettingPlay {
+                    self.pausePlayButton.alpha = 0
+                }
+             })
         }
     }
     
