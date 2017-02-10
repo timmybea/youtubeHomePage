@@ -58,8 +58,18 @@ class VideoPlayerView: UIView {
     var videoLengthLabel: UILabel = {
         let label = UILabel()
         label.text = "00:00"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .right
+        label.textColor = UIColor.white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var currentTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .left
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -76,15 +86,27 @@ class VideoPlayerView: UIView {
     }()
     
     func handleSliderChangedValue() {
-        print(slider.value)
-        
-        //player?.seek(to: <#T##CMTime#>, completionHandler: { (completedSeek) in
-            //do something here
-        //})
+        //print(slider.value)
+        if let duration = player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            
+            let value = Float64(slider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                //do something here
+            })
+
+
+            
+        }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setupGradientLayer()
+        
         backgroundColor = UIColor.black
         setupVideoPlayer()
 
@@ -104,14 +126,20 @@ class VideoPlayerView: UIView {
         
         controlsContainerView.addSubview(videoLengthLabel)
         videoLengthLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        videoLengthLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         videoLengthLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
         videoLengthLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         
+        controlsContainerView.addSubview(currentTimeLabel)
+        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        currentTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        currentTimeLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        currentTimeLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        
         controlsContainerView.addSubview(slider)
         slider.rightAnchor.constraint(equalTo: videoLengthLabel.leftAnchor).isActive = true
-        slider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        slider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        slider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor).isActive = true
+        slider.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         slider.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
     }
@@ -137,6 +165,7 @@ class VideoPlayerView: UIView {
     }
     
     
+    //This function changes the play position of the video when the slider changes value
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "currentItem.loadedTimeRanges" {
             activityIndicatorView.stopAnimating()
@@ -150,6 +179,14 @@ class VideoPlayerView: UIView {
                 videoLengthLabel.text = "\(minutesText):\(secondsText)"
             }
         }
+    }
+    
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.9, 1.6]
+        controlsContainerView.layer.addSublayer(gradientLayer)
     }
 
 }
