@@ -29,7 +29,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.navigationBar.isTranslucent = false
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        titleLabel?.textColor = UIColor.blue
+        titleLabel?.textColor = UIColor.white
         titleLabel?.text = "  Home"
         titleLabel?.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
