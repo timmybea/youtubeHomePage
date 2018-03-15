@@ -165,7 +165,7 @@ class VideoPlayerView: UIView {
         let urlString = "https://firebasestorage.googleapis.com/v0/b/videoplayerhosting.appspot.com/o/Gifter.mp4?alt=media&token=ec77e2bf-527e-4b60-8baa-2cabed68c767"
         
         let videoURL = NSURL(string: urlString)
-        player = AVPlayer(url: videoURL as! URL)
+        player = AVPlayer(url: videoURL as URL!)
         let playerLayer = AVPlayerLayer(player: player)
         
         self.layer.addSublayer(playerLayer)

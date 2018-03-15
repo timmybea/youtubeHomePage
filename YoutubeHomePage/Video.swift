@@ -12,7 +12,7 @@ class SafeJsonObject: NSObject {
     
     override func setValue(_ value: Any?, forKey key: String) {
         //To prevent a crash if new or extra keys appear in the json, we need to test if the keys are able to be set:
-        let upperFirstChar = String(key.characters.first!).uppercased()
+        let upperFirstChar = String(key.first!).uppercased()
         let index = key.index(key.startIndex, offsetBy: 1)
         let removedFirstLetter = key.substring(from: index)
         let CapitalizedKey = upperFirstChar + removedFirstLetter
